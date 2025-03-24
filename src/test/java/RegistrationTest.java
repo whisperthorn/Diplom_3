@@ -48,7 +48,7 @@ public class RegistrationTest extends BaseTest{
         driver.get(PageEndpoints.REGISTER_PAGE_URL);
 
         // Вводим в поле пароля значение недостаточной длины и нажимаем на кнопку Зарегистрировать, чтобы проверить ошибку
-        regPage.inputInvalidPassword(api.getShortPassword());
+        regPage.inputInvalidPassword(dataGen.getShortPassword());
 
         // Проверяем наличие ошибки
         assertTrue("Должно быть сообщение об ошибке", regPage.isPasswordErrorVisible());

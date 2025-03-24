@@ -1,4 +1,4 @@
-package site.stellarburgers.model.Util;
+package site.stellarburgers.model.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

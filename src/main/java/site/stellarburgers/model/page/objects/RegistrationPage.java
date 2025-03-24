@@ -6,7 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import site.stellarburgers.model.Util.CreateAccountPojo;
+import site.stellarburgers.model.util.CreateAccountPojo;
 import java.time.Duration;
 
 public class RegistrationPage {

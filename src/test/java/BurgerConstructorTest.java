@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import site.stellarburgers.model.page.objects.MainPage;
 import site.stellarburgers.model.page.objects.PageEndpoints;
-import site.stellarburgers.model.webdriver.WebDriverFactory;
-import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,10 +17,7 @@ public class BurgerConstructorTest extends BaseTest{
     @Override
     @Before
     public void setUp() {
-        String browser = System.getProperty("browser","chrome");
-        driver = WebDriverFactory.createWebDriver(browser);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        webDriverSetUp();
         mainPage = new MainPage(driver);
         driver.get(PageEndpoints.MAIN_PAGE_URL);
     }
@@ -30,16 +25,19 @@ public class BurgerConstructorTest extends BaseTest{
     @Test
     @DisplayName("Переход к разделу Булки в конструкторе бургеров")
     @Description("Проверяем успешный переход в раздел Булки при нажатии на соответствующую кнопку в конструкторе бургеров")
-    public void testConstructorBunSection(){
+    public void testConstructorBunSection() {
         // Для проверки перехода на булки надо выбрать другой раздел
-        mainPage.clickSauceSection();
+        mainPage.clickFillingSection();
 
         // Выбираем раздел Булки
         mainPage.clickBunSection();
 
         // Проверяем, что раздел Булки активен
-        boolean actual = mainPage.isSectionActive(bun);
-        assertTrue(String.format("Раздел %S должен быть активен", bun), actual);
+        boolean actual = mainPage.isBunSectionActive();
+        assertTrue(String.format("Кнопка раздела %s должна быть активна", bun), actual);
+
+        // Проверяем, что раздел видно на экране
+        assertTrue(String.format("Раздел %s должно быть видно на экране", bun), mainPage.isBunSectionInViewport());
     }
 
     @Test
@@ -50,8 +48,11 @@ public class BurgerConstructorTest extends BaseTest{
         mainPage.clickSauceSection();
 
         // Проверяем, что раздел Соусы активен
-        boolean actual = mainPage.isSectionActive(sauce);
-        assertTrue(String.format("Раздел %S должен быть активен", sauce), actual);
+        boolean actual = mainPage.isSauceSectionActive();
+        assertTrue(String.format("Кнопка раздела %s должна быть активна", sauce), actual);
+
+        // Проверяем, что раздел видно на экране
+        assertTrue(String.format("Раздел %s должно быть видно на экране", sauce), mainPage.isSauceSectionInViewport());
     }
 
     @Test
@@ -62,8 +63,11 @@ public class BurgerConstructorTest extends BaseTest{
         mainPage.clickFillingSection();
 
         // Проверяем, что раздел Начинки активен
-        boolean actual = mainPage.isSectionActive(filling);
-        assertTrue(String.format("Раздел %S должен быть активен", filling), actual);
+        boolean actual = mainPage.isFillingSectionActive();
+        assertTrue(String.format("Кнопка раздела %s должна быть активна", filling), actual);
+
+        // Проверяем, что раздел видно на экране
+        assertTrue(String.format("Раздел %s должно быть видно на экране", filling), mainPage.isFillingSectionInViewport());
     }
 
     @Override

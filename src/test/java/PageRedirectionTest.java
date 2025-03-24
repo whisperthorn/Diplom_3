@@ -15,7 +15,8 @@ public class PageRedirectionTest extends BaseTest{
     AccountPage accountPage;
 
     @Before
-    public void createAccount(){
+    public void setUp(){
+        super.setUp();
         api.createAccount(credentials);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);

@@ -1,6 +1,5 @@
-package site.stellarburgers.model.Util;
+package site.stellarburgers.model.util;
 
-import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -53,22 +52,5 @@ public class BaseApi {
     public void deleteAccount(CreateAccountPojo credentials){
         String bearerToken = logIn(credentials)+"";
         sendDeleteRequest(ST_BURGERS_USER, bearerToken);
-    }
-
-    @Step("Создаем данные для аккаунта")
-    public CreateAccountPojo getCredentials()
-    {
-        Faker faker = new Faker();
-        String name = faker.name().firstName();
-        String email = faker.number().digits(4)+faker.internet().emailAddress();
-        String password = faker.internet().password(11,12);
-        CreateAccountPojo credentials = new CreateAccountPojo(email, password, name);
-        return credentials;
-    }
-
-    @Step("Генерируем невалидный короткий пароль")
-    public String getShortPassword() {
-        Faker faker = new Faker();
-        return faker.internet().password(1, 5);
     }
 }
